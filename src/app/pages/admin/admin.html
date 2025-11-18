@@ -134,7 +134,7 @@
                 <label>URL de Imagen</label>
                 <input type="url" [(ngModel)]="productoForm.imagen_url" name="imagen_url" placeholder="https://ejemplo.com/imagen.jpg" class="form-input">
                 <small style="color: #666; font-size: 0.85rem;">Ingrese la URL completa de la imagen del producto</small>
-                <div *ngIf="productoForm.imagen_url" class="imagen-preview-form">
+                <div *ngIf="productoForm.imagen_url && productoForm.imagen_url.length > 10" class="imagen-preview-form">
                   <img [src]="productoForm.imagen_url" alt="Vista previa">
                 </div>
               </div>
