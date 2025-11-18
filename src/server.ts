@@ -1,13 +1,22 @@
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
-import { getContext } from '@netlify/angular-runtime/context';
+import { getContext } from '@netlify/angular-runtime/context.mjs';
 
 const angularAppEngine = new AngularAppEngine();
 
-/**
- * Este es el manejador de peticiones que Netlify busca.
- * Sin esto, el "Manifiesto" no se activa.
- */
-export async function reqHandler(req: Request) {
+export async function netlifyAppEngineHandler(request: Request): Promise<Response> {
   const context = getContext();
-  return await angularAppEngine.handle(req, context);
+
+  // Aquí puedes definir endpoints de API de ejemplo si lo necesitas.
+  // const pathname = new URL(request.url).pathname;
+  // if (pathname === '/api/hello') {
+  //   return Response.json({ message: 'Hello from the API' });
+  // }
+
+  const result = await angularAppEngine.handle(request, context);
+  return result || new Response('Not found', { status: 404 });
 }
+
+/**
+ * El manejador de solicitudes utilizado por el CLI de Angular (dev-server y durante el build).
+ */
+export const reqHandler = createRequestHandler(netlifyAppEngineHandler);
