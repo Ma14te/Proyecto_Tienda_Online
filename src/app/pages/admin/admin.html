@@ -130,14 +130,16 @@
                   <option *ngFor="let cat of categorias" [value]="cat.id_categoria">{{cat.nombre}}</option>
                 </select>
               </div>
+              
               <div class="form-group">
                 <label>URL de Imagen</label>
                 <input type="url" [(ngModel)]="productoForm.imagen_url" name="imagen_url" placeholder="https://ejemplo.com/imagen.jpg" class="form-input">
                 <small style="color: #666; font-size: 0.85rem;">Ingrese la URL completa de la imagen del producto</small>
                 <div *ngIf="productoForm.imagen_url" class="imagen-preview-form">
-                  <img [src]="productoForm.imagen_url" alt="Vista previa" (error)="productoForm.imagen_url = ''">
+                  <img [src]="productoForm.imagen_url" alt="Vista previa">
                 </div>
               </div>
+              
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <button type="button" (click)="cancelarProducto()" class="btn btn-secondary">Cancelar</button>

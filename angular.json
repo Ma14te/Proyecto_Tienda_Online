@@ -13,24 +13,27 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/tienda_online",
+            "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ],
+            "scripts": [],
             "server": "src/main.server.ts",
+            "prerender": true,
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "outputMode": "server"
           },
           "configurations": {
             "production": {
@@ -42,8 +45,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "50kb",
-                  "maximumError": "100kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -57,7 +60,10 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular/build:application",
+          "options": {
+            "buildTarget": "tienda_online:build"
+          },
           "configurations": {
             "production": {
               "buildTarget": "tienda_online:build:production"
@@ -69,10 +75,13 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
+          "builder": "@angular/build:application",
+          "options": {
+            "buildTarget": "tienda_online:build"
+          }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:application",
           "options": {
             "polyfills": [
               "zone.js",
@@ -80,14 +89,13 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
-            ]
+            ],
+            "scripts": []
           }
         }
       }
