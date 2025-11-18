@@ -1,0 +1,88 @@
+<div class="carrito-page">
+  <div class="container">
+    <h1 class="page-title">Carrito de Compras</h1>
+
+    <!-- Carrito vacío -->
+    <div *ngIf="items.length === 0" class="empty-cart">
+      <img src="/Carrito.svg" alt="Carrito vacío" class="empty-icon">
+      <h2>Tu carrito está vacío</h2>
+      <p>Agrega productos para comenzar tu compra</p>
+      <a routerLink="/" class="btn-primary">Ver productos</a>
+    </div>
+
+    <!-- Carrito con productos -->
+    <div *ngIf="items.length > 0" class="cart-content">
+      <div class="cart-items">
+        <div *ngFor="let item of items" class="cart-item">
+          <div class="item-image">
+            <img [src]="item.imagen || '/placeholder.png'" [alt]="item.nombre">
+          </div>
+          
+          <div class="item-details">
+            <h3>{{ item.nombre }}</h3>
+            <p class="item-price">${{ item.precio | number:'1.2-2' }}</p>
+            <p class="item-stock">Stock disponible: {{ item.stock }}</p>
+          </div>
+
+          <div class="item-quantity">
+            <button (click)="decrementarCantidad(item)" class="qty-btn">-</button>
+            <input type="number" 
+                   [value]="item.cantidad" 
+                   (change)="actualizarCantidad(item, $event)"
+                   min="1" 
+                   [max]="item.stock"
+                   class="qty-input">
+            <button (click)="incrementarCantidad(item)" class="qty-btn">+</button>
+          </div>
+
+          <div class="item-subtotal">
+            <p class="subtotal-label">Subtotal:</p>
+            <p class="subtotal-price">${{ (item.precio * item.cantidad) | number:'1.2-2' }}</p>
+          </div>
+
+          <button (click)="eliminarItem(item)" class="btn-remove">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <h2>Resumen del Pedido</h2>
+        
+        <div class="summary-row">
+          <span>Productos ({{ totalItems }})</span>
+          <span>${{ totalPrecio | number:'1.2-2' }}</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Envío</span>
+          <span>GRATIS</span>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <span class="total-price">${{ totalPrecio | number:'1.2-2' }}</span>
+        </div>
+
+        <button (click)="realizarCompra()" 
+                class="btn-checkout"
+                [disabled]="procesando">
+          {{ procesando ? 'Procesando...' : 'Realizar Compra' }}
+        </button>
+
+        <button (click)="vaciarCarrito()" class="btn-clear">
+          Vaciar carrito
+        </button>
+
+        <a routerLink="/" class="btn-continue">Continuar comprando</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>

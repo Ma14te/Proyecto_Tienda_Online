@@ -1,0 +1,104 @@
+<div class="home-page">
+    <!-- Quick Actions / Services -->
+    <div class="services-banner">
+      <div class="service-item">
+        <img src="/Envio y entrega/Servientrega_Logo.svg" alt="Envío">
+        <div>
+          <h4>Envío Rápido</h4>
+          <p>Entrega a todo Ecuador</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="/Metodos de pagos ,credito y efectivo/Visa_Logo.svg" alt="Pagos">
+        <div>
+          <h4>Pago Seguro</h4>
+          <p>Visa, Mastercard y más</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="/Persona devolviendo_un producto.svg" alt="Devoluciones">
+        <div>
+          <h4>Devoluciones</h4>
+          <p>30 días de garantía</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="/Logo_Ekuamerket.svg" alt="Calidad">
+        <div>
+          <h4>Calidad Garantizada</h4>
+          <p>Productos certificados</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Products Section -->
+    <div id="productos" class="productos-section">
+      <div class="section-header">
+        <h2 class="section-title">Productos destacados</h2>
+        <div class="filters-bar">
+          <select [(ngModel)]="categoriaSeleccionada" (change)="filtrarProductos()" class="filter-select">
+            <option value="">Todas las categorías</option>
+            <option *ngFor="let cat of categorias" [value]="cat.id_categoria">{{cat.nombre}}</option>
+          </select>
+          <div class="search-box">
+            <img src="/Lupa.svg" alt="Buscar" class="search-icon">
+            <input type="search" [(ngModel)]="busqueda" (input)="filtrarProductos()" 
+                   placeholder="Buscar en productos..." class="search-input">
+          </div>
+        </div>
+      </div>
+
+      <div class="productos-grid">
+        <div *ngFor="let producto of productosFiltrados" class="producto-card">
+          <div class="producto-badge" *ngIf="producto.stock < 10 && producto.stock > 0">
+            <span class="badge-limited">¡Últimas unidades!</span>
+          </div>
+          <div class="producto-badge" *ngIf="producto.stock === 0">
+            <span class="badge-out">Agotado</span>
+          </div>
+          
+          <div class="producto-imagen">
+            <img [src]="obtenerImagenPrincipal(producto)" 
+                 [alt]="producto.nombre" 
+                 loading="lazy" />
+          </div>
+          
+          <div class="producto-info">
+            <h3 class="producto-nombre">{{producto.nombre}}</h3>
+            <div class="producto-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(4.5)</span>
+            </div>
+            <p class="producto-descripcion">{{producto.descripcion}}</p>
+            
+            <div class="producto-footer">
+              <div class="precio-container">
+                <span class="precio-simbolo">$</span>
+                <span class="precio-entero">{{producto.precio | number:'1.0-0'}}</span>
+                <span class="precio-decimal">{{getPrecioDecimal(producto.precio)}}</span>
+              </div>
+              <div class="producto-actions">
+                <span class="stock-info" [class.stock-bajo]="producto.stock < 10">
+                  {{producto.stock > 0 ? 'En stock (' + producto.stock + ')' : 'Agotado'}}
+                </span>
+                <button class="btn-add-cart" 
+                        [disabled]="producto.stock === 0"
+                        (click)="agregarAlCarrito(producto)">
+                  <img src="/Carrito.svg" alt="Añadir">
+                  Añadir al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="productosFiltrados.length === 0" class="empty-state">
+        <img src="/basurero.svg" alt="Sin resultados">
+        <h3>No se encontraron productos</h3>
+        <p>Intenta con otros términos de búsqueda o filtros</p>
+      </div>
+    </div>
+</div>
+
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>

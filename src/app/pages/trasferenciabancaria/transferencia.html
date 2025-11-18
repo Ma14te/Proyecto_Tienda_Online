@@ -1,0 +1,132 @@
+<div class="transferencia-page">
+  <!-- Hero Section -->
+  <div class="page-header">
+    <h1>Transferencias Bancarias</h1>
+    <p>Realiza tu pago de forma segura mediante transferencia bancaria</p>
+  </div>
+
+  <!-- Instrucciones -->
+  <div class="instructions-section">
+    <h2>¿Cómo realizar tu transferencia?</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Realiza la transferencia</h3>
+        <p>Utiliza los datos de la cuenta bancaria de tu preferencia para realizar la transferencia desde tu banco</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Guarda el comprobante</h3>
+        <p>Conserva el comprobante de la transferencia como respaldo del pago realizado</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Envía confirmación</h3>
+        <p>Envía el comprobante a <strong>pagos@ekuamarket.com</strong> con tu número de pedido</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Confirmamos tu pago</h3>
+        <p>Verificaremos tu pago en 24-48 horas hábiles y procesaremos tu pedido</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cuentas Bancarias -->
+  <div class="accounts-section">
+    <h2>Nuestras Cuentas Bancarias</h2>
+    <p class="section-subtitle">Elige la cuenta de tu preferencia para realizar la transferencia</p>
+    
+    <div class="accounts-grid">
+      <div *ngFor="let cuenta of cuentas" class="account-card">
+        <div class="account-header">
+          <img [src]="cuenta.logo" [alt]="cuenta.banco" class="bank-logo">
+          <h3>{{cuenta.banco}}</h3>
+        </div>
+        
+        <div class="account-details">
+          <div class="detail-row">
+            <span class="label">Tipo de Cuenta:</span>
+            <span class="value">{{cuenta.tipoCuenta}}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span class="label">Número de Cuenta:</span>
+            <span class="value">{{cuenta.numero}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Titular:</span>
+            <span class="value">{{cuenta.titular}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">RUC:</span>
+            <span class="value">{{cuenta.ruc}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Email para comprobantes:</span>
+            <span class="value">{{cuenta.email}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Información Importante -->
+  <div class="info-section">
+    <h2>Información Importante</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">⏱️</div>
+        <h4>Tiempo de Procesamiento</h4>
+        <p>Las transferencias bancarias son verificadas en un plazo de 24 a 48 horas hábiles</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <h4>Envío de Comprobante</h4>
+        <p>Es obligatorio enviar el comprobante de pago para procesar tu pedido</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">💰</div>
+        <h4>Sin Comisiones</h4>
+        <p>No cobramos ninguna comisión adicional por pagos mediante transferencia</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">✓</div>
+        <h4>Confirmación Automática</h4>
+        <p>Recibirás un email cuando tu pago sea verificado y procesado</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logos de Métodos de Pago -->
+  <div class="payment-logos">
+    <h3>También puedes pagar con:</h3>
+    <div class="logos-grid">
+      <img src="/Metodos de pagos ,credito y efectivo/Visa_Logo.svg" alt="Visa">
+      <img src="/Metodos de pagos ,credito y efectivo/Mastercard_Logo.svg" alt="Mastercard">
+    </div>
+    <a href="/metodos_de_pago" class="btn-payment-methods">Ver todos los métodos de pago</a>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>¿Puedo hacer transferencias desde cualquier banco?</h4>
+        <p>Sí, puedes realizar transferencias desde cualquier institución financiera del Ecuador.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Qué debo incluir en el comprobante?</h4>
+        <p>Debes incluir tu número de pedido y nombre completo en el asunto del email.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Qué pasa si no envío el comprobante?</h4>
+        <p>Tu pedido no será procesado hasta que recibamos y verifiquemos el comprobante de pago.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Puedo hacer transferencias internacionales?</h4>
+        <p>Por el momento solo aceptamos transferencias desde bancos ecuatorianos.</p>
+      </div>
+    </div>
+  </div>
+</div>

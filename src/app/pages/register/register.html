@@ -1,0 +1,31 @@
+<div class="auth-page-container">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Crear Cuenta</h2>
+        <p>Regístrate para comenzar</p>
+      </div>
+      <form (submit)="onSubmit($event)" class="auth-form">
+        <div class="form-group">
+          <label for="registro-nombre">Nombre Completo</label>
+          <input type="text" id="registro-nombre" [(ngModel)]="nombre" name="nombre" placeholder="Juan Pérez" required>
+        </div>
+        <div class="form-group">
+          <label for="registro-email">Correo Electrónico</label>
+          <input type="email" id="registro-email" [(ngModel)]="email" name="email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="registro-password">Contraseña</label>
+          <input type="password" id="registro-password" [(ngModel)]="password" name="password" placeholder="Mínimo 6 caracteres" required minlength="6">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Crear Cuenta</button>
+      </form>
+      <div class="auth-footer">
+        <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+        <p><a routerLink="/">Volver a la tienda</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>

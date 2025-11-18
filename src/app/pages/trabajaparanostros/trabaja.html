@@ -1,0 +1,148 @@
+<div class="trabaja-page">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Únete a Ekuamarket</h1>
+      <p>Forma parte de la innovación tecnológica en Ecuador</p>
+      <p class="hero-subtitle">Estamos construyendo el futuro del comercio electrónico y la computación cuántica</p>
+    </div>
+    <div class="hero-image">
+      <img src="/Foto compoaratiba con varios empleados.png" alt="Equipo Ekuamarket">
+    </div>
+  </div>
+
+  <!-- Por qué trabajar con nosotros -->
+  <div class="benefits-section">
+    <h2>¿Por qué Ekuamarket?</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🚀</div>
+        <h3>Innovación Constante</h3>
+        <p>Trabaja en proyectos revolucionarios como nuestra computadora cuántica, la primera en Ecuador</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🌱</div>
+        <h3>Crecimiento Profesional</h3>
+        <p>Programas de capacitación continua y oportunidades de desarrollo de carrera</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💰</div>
+        <h3>Salario Competitivo</h3>
+        <p>Remuneración acorde al mercado con bonos por desempeño</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🏥</div>
+        <h3>Beneficios Completos</h3>
+        <p>Seguro médico, dental, y programas de bienestar para ti y tu familia</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⚖️</div>
+        <h3>Balance Vida-Trabajo</h3>
+        <p>Horarios flexibles y opciones de trabajo remoto</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🇪🇨</div>
+        <h3>Orgullo Ecuatoriano</h3>
+        <p>Contribuye al desarrollo tecnológico y económico de Ecuador</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nuestra Cultura -->
+  <div class="culture-section">
+    <div class="culture-image">
+      <img src="/Foto con los empleados y el fundador con bandera de su pais ecuador celebrando.png" alt="Cultura Ekuamarket">
+    </div>
+    <div class="culture-content">
+      <h2>Nuestra Cultura</h2>
+      <p>En Ekuamarket, creemos en un ambiente de trabajo colaborativo, inclusivo e innovador. Celebramos la diversidad y fomentamos la creatividad.</p>
+      <ul class="culture-values">
+        <li><strong>Innovación:</strong> Siempre buscamos nuevas formas de hacer las cosas mejor</li>
+        <li><strong>Colaboración:</strong> Trabajamos juntos para lograr objetivos comunes</li>
+        <li><strong>Excelencia:</strong> Nos esforzamos por la calidad en todo lo que hacemos</li>
+        <li><strong>Integridad:</strong> Actuamos con honestidad y transparencia</li>
+        <li><strong>Pasión:</strong> Amamos lo que hacemos y nos dedicamos al máximo</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Posiciones Abiertas -->
+  <div class="positions-section">
+    <h2>Posiciones Abiertas</h2>
+    <p class="section-subtitle">Encuentra la oportunidad perfecta para ti</p>
+    
+    <div class="positions-grid">
+      <div *ngFor="let pos of posiciones" class="position-card">
+        <div class="position-header">
+          <h3>{{pos.titulo}}</h3>
+          <span class="position-type">{{pos.tipo}}</span>
+        </div>
+        <div class="position-meta">
+          <span class="meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            {{pos.ubicacion}}
+          </span>
+          <span class="meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            {{pos.departamento}}
+          </span>
+        </div>
+        <p class="position-description">{{pos.descripcion}}</p>
+        <button class="btn-apply">Aplicar Ahora</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Investigación -->
+  <div class="research-section">
+    <div class="research-content">
+      <h2>Ekuamarket Science</h2>
+      <p>Nuestro departamento de investigación está trabajando en tecnologías revolucionarias, incluyendo la primera computadora cuántica desarrollada en Ecuador.</p>
+      <p>Si te apasiona la investigación de vanguardia y quieres contribuir a avances tecnológicos que cambiarán el mundo, esta es tu oportunidad.</p>
+      <a href="/ekuamarket-science" class="btn-learn">Conocer más sobre nuestras investigaciones →</a>
+    </div>
+    <div class="research-image">
+      <img src="/Ing en sitemas asiendo investigaciones en la computadora cuantica.png" alt="Investigación Cuántica">
+    </div>
+  </div>
+
+  <!-- Proceso de Aplicación -->
+  <div class="process-section">
+    <h2>Proceso de Aplicación</h2>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h4>Aplica en Línea</h4>
+        <p>Envía tu CV y carta de presentación para la posición que te interesa</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h4>Revisión Inicial</h4>
+        <p>Nuestro equipo revisará tu aplicación en 3-5 días hábiles</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h4>Entrevistas</h4>
+        <p>Proceso de entrevistas con el equipo técnico y gerencial</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h4>Oferta</h4>
+        <p>Si eres seleccionado, recibirás una oferta formal de empleo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Final -->
+  <div class="cta-section">
+    <h2>¿Listo para Unirte?</h2>
+    <p>Envía tu CV a <strong>rrhh@ekuamarket.com</strong> o completa el formulario en línea</p>
+    <button class="btn-cta">Enviar mi CV</button>
+  </div>
+</div>

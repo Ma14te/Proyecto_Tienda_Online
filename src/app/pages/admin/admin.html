@@ -1,0 +1,324 @@
+<div class="admin-layout">
+      <aside class="admin-sidebar">
+        <nav class="admin-nav">
+          <a href="#" [class.active]="tabActiva === 'estadisticas'" (click)="cambiarTab('estadisticas', $event)" class="admin-nav-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            Estadísticas
+          </a>
+          <a href="#" [class.active]="tabActiva === 'productos'" (click)="cambiarTab('productos', $event)" class="admin-nav-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            Productos
+          </a>
+          <a href="#" [class.active]="tabActiva === 'categorias'" (click)="cambiarTab('categorias', $event)" class="admin-nav-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Categorías
+          </a>
+          <a href="#" [class.active]="tabActiva === 'pedidos'" (click)="cambiarTab('pedidos', $event)" class="admin-nav-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Pedidos
+          </a>
+        </nav>
+      </aside>
+      <main class="admin-content">
+        
+        <section *ngIf="tabActiva === 'estadisticas'" class="admin-section activo">
+          <div class="admin-header">
+            <div>
+              <h1>Dashboard</h1>
+              <p>Resumen general de la tienda</p>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon productos">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Total Productos</span>
+                <span class="stat-value">{{estadisticas.totalProductos}}</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon categorias">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Categorías</span>
+                <span class="stat-value">{{estadisticas.totalCategorias}}</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon stock">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Stock Total</span>
+                <span class="stat-value">{{estadisticas.stockTotal}}</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon valor">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Valor Inventario</span>
+                <span class="stat-value">{{estadisticas.valorInventario | currency:'USD'}}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section *ngIf="tabActiva === 'productos'" class="admin-section activo">
+          <div class="admin-header">
+            <h1>Gestión de Productos ({{productos.length}})</h1>
+            <button (click)="nuevoProducto()" class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Nuevo Producto
+            </button>
+          </div>
+          <div *ngIf="mostrarFormProducto" class="form-card">
+            <h3>{{productoForm.id_producto ? 'Editar Producto' : 'Nuevo Producto'}}</h3>
+            <form (ngSubmit)="guardarProducto($event)">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" [(ngModel)]="productoForm.nombre" name="nombre" required class="form-input">
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea [(ngModel)]="productoForm.descripcion" name="descripcion" rows="3" class="form-input"></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Precio</label>
+                  <input type="number" [(ngModel)]="productoForm.precio" name="precio" step="0.01" required class="form-input">
+                </div>
+                <div class="form-group">
+                  <label>Stock</label>
+                  <input type="number" [(ngModel)]="productoForm.stock" name="stock" required class="form-input">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Categoría</label>
+                <select [(ngModel)]="productoForm.id_categoria" name="id_categoria" required class="form-input">
+                  <option value="">Seleccione una categoría</option>
+                  <option *ngFor="let cat of categorias" [value]="cat.id_categoria">{{cat.nombre}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>URL de Imagen</label>
+                <input type="url" [(ngModel)]="productoForm.imagen_url" name="imagen_url" placeholder="https://ejemplo.com/imagen.jpg" class="form-input">
+                <small style="color: #666; font-size: 0.85rem;">Ingrese la URL completa de la imagen del producto</small>
+                <div *ngIf="productoForm.imagen_url" class="imagen-preview-form">
+                  <img [src]="productoForm.imagen_url" alt="Vista previa" (error)="productoForm.imagen_url = ''">
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" (click)="cancelarProducto()" class="btn btn-secondary">Cancelar</button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="productos.length === 0 && !mostrarFormProducto" class="text-center">
+            <p>No se encontraron productos. (Total: {{productos.length}})</p>
+          </div>
+          
+          <div *ngIf="productos.length > 0" class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th class="text-center">Imagen</th> <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let producto of productos">
+                  <td>{{producto.id_producto}}</td>
+                  <td class="text-center"> <div class="producto-thumbnail">
+                      <img [src]="obtenerImagenPrincipal(producto)" [alt]="producto.nombre">
+                    </div>
+                  </td>
+                  <td>{{producto.nombre}}</td>
+                  <td>{{ obtenerNombreCategoria(producto.id_categoria) }}</td>
+                  <td>{{producto.precio | currency:'USD'}}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                      'badge-success': producto.stock > 10,
+                      'badge-warning': producto.stock <= 10 && producto.stock > 0,
+                      'badge-error': producto.stock === 0
+                    }">
+                      {{producto.stock}}
+                    </span>
+                  </td>
+                  <td>
+                    <button (click)="editarProducto(producto)" class="btn-icon" title="Editar">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </button>
+                    <button (click)="eliminarProducto(producto.id_producto)" class="btn-icon btn-danger" title="Eliminar">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </section>
+
+        <section *ngIf="tabActiva === 'categorias'" class="admin-section activo">
+          <div class="admin-header">
+            <h1>Gestión de Categorías</h1>
+            <button (click)="nuevaCategoria()" class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Nueva Categoría
+            </button>
+          </div>
+          <div *ngIf="mostrarFormCategoria" class="form-card">
+            <h3>{{categoriaForm.id_categoria ? 'Editar Categoría' : 'Nueva Categoría'}}</h3>
+            <form (ngSubmit)="guardarCategoria($event)">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" [(ngModel)]="categoriaForm.nombre" name="nombre" required class="form-input">
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea [(ngModel)]="categoriaForm.descripcion" name="descripcion" rows="3" class="form-input"></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" (click)="cancelarCategoria()" class="btn btn-secondary">Cancelar</button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="categorias.length === 0 && !mostrarFormCategoria" class="text-center">
+            <p>No se encontraron categorías.</p>
+          </div>
+          <div *ngIf="categorias.length > 0" class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Productos</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let categoria of categorias">
+                  <td>{{categoria.id_categoria}}</td>
+                  <td>{{categoria.nombre}}</td>
+                  <td>{{categoria.descripcion || 'Sin descripción'}}</td>
+                  <td>
+                    <span class="badge badge-info">
+                      {{contarProductosPorCategoria(categoria.id_categoria)}}
+                    </span>
+                  </td>
+                  <td>
+                    <button (click)="editarCategoria(categoria)" class="btn-icon" title="Editar">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </button>
+                    <button (click)="eliminarCategoria(categoria.id_categoria)" class="btn-icon btn-danger" title="Eliminar">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section *ngIf="tabActiva === 'pedidos'" class="admin-section activo">
+          <div class="admin-header">
+            <h1>Gestión de Pedidos</h1>
+          </div>
+          <div *ngIf="pedidos.length === 0" class="text-center">
+            <p>No se encontraron pedidos.</p>
+          </div>
+          <div *ngIf="pedidos.length > 0" class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Usuario (Email)</th>
+                  <th>Fecha</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pedido of pedidos">
+                  <td>{{pedido.id_pedido}}</td>
+                  <td>{{pedido.email_usuario}}</td>
+                  <td>{{pedido.fecha_pedido | date:'short'}}</td>
+                  <td>{{pedido.total | currency:'USD'}}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                      'badge-warning': pedido.estado === 'pendiente',
+                      'badge-info': pedido.estado === 'procesando',
+                      'badge-success': pedido.estado === 'entregado' || pedido.estado === 'enviado',
+                      'badge-error': pedido.estado === 'cancelado'
+                    }">
+                      {{pedido.estado | titlecase}}
+                    </span>
+                  </td>
+                  <td>
+                    <select (change)="actualizarEstadoPedido(pedido, $event)" class="filter-select">
+                      <option [selected]="pedido.estado === estado" *ngFor="let estado of estadosPedido" [value]="estado">
+                        {{estado | titlecase}}
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
